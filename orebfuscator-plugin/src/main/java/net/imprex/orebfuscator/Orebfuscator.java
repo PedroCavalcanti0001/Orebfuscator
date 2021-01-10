@@ -31,9 +31,11 @@ public class Orebfuscator extends JavaPlugin implements Listener {
 	private ObfuscatorSystem obfuscatorSystem;
 	private ProximityHider proximityHider;
 	private ProximityPacketListener proximityPacketListener;
+	private static Orebfuscator instance;
 
 	@Override
 	public void onEnable() {
+		this.instance = this;
 		try {
 			// Check if protocolLib is enabled
 			if (this.getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
@@ -132,5 +134,9 @@ public class Orebfuscator extends JavaPlugin implements Listener {
 
 	public ProximityPacketListener getProximityPacketListener() {
 		return this.proximityPacketListener;
+	}
+
+	public static Orebfuscator getInstance() {
+		return instance;
 	}
 }

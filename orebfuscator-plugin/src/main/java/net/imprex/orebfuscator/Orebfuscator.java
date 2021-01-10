@@ -2,6 +2,7 @@ package net.imprex.orebfuscator;
 
 import java.util.logging.Level;
 
+import net.imprex.orebfuscator.command.OrebfuscatorCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventPriority;
@@ -43,9 +44,6 @@ public class Orebfuscator extends JavaPlugin implements Listener {
 			// Load configurations
 			this.config = new OrebfuscatorConfig(this);
 
-			// Initialize metrics
-			new MetricsSystem(this);
-
 			// initialize update system and check for updates
 			this.updateSystem = new UpdateSystem(this);
 
@@ -67,6 +65,9 @@ public class Orebfuscator extends JavaPlugin implements Listener {
 
 			// Load packet listener
 			this.obfuscatorSystem.registerChunkListener();
+
+
+			getServer().getPluginCommand("orebfuscator").setExecutor(new OrebfuscatorCommand());
 
 			// Store formatted config
 			this.config.store();
